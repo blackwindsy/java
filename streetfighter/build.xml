@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<project name="buildJava" default="compile" basedir=".">
+
+	<property name="proj.root.dir" value="${basedir}"/>
+    <property name="target.jvm" value="1.8"/>
+    <property name="src.dir" value="${proj.root.dir}/src"/>
+    <property name="lib.dir" value="${proj.root.dir}/lib"/>
+    <property name="build.dir" value="${proj.root.dir}/build"/>
+    <property name="dist.dir" value="${proj.root.dir}/dist"/>
+
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+
+
+	<target name="init">
+		<tstamp>
+			<format property="curtime" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+		<condition property="isWin">
+			<os family="windows" />
+		</condition>
+		<condition property="isNix">
+			<os family="unix" />
+		</condition>
+		<echo message="Start time     = ${curtime}" />
+		<echo message="isWin          = ${isWin}" />
+		<echo message="isNix          = ${isNix}" />
+		<echo message="proj.root.dir       = ${proj.root.dir}" />
+		<echo message="target.name         = ${target.name}" />
+		<echo message="target.jvm          = ${target.jvm}" />
+		<echo message="lib.dir             = ${lib.dir}" />
+		<echo message="build.dir           = ${build.dir}" />
+		<echo message="dist.dir            = ${dist.dir}" />
+	</target>
+
+
+	<target name="compile"
+			depends="init"
+			description="compile java source code">
+		<delete dir="${build.dir}/classes"/>
+		<mkdir dir="${build.dir}/classes"/>
+		<javac destdir="${build.dir}/classes" source="${target.jvm}" target="${target.jvm}" debug="on" deprecation="off" optimize="on">
+			<classpath refid="classpath"/>
+			<src path="${src.dir}/com"/>
+		</javac>
+	</target>
+
+	<target name="run"
+			depends="compile"
+			description="run java byte code">
+		<java classname="com.sysoft.StreetFighter"
+				fork="true">
+			<classpath>
+				<!--
+				-->
+				<pathelement location="${build.dir}/classes"/>
+				<!--
+				<fileset dir="${build.dir}/classes">
+					<include name="**/*.class"/>
+				</fileset>
+				-->
+			</classpath>
+		</java>
+	</target>
+
+
+
+</project>
