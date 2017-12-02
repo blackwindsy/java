@@ -1,10 +1,15 @@
 package com.sysoft;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 public class Fighter extends Person
 {
-	int locationX;
-	int locationY;
-	FacingDirection direction;
+	private int locationX;
+	private int locationY;
+	private ImageIcon defaultImageIcon;
+	private Image defaultImage;
+	private FacingDirection direction;
 
 
 	public Fighter()
@@ -15,9 +20,21 @@ public class Fighter extends Person
 		direction = FacingDirection.RIGHT;
 	}
 
-	public Fighter(String initName, int initHeight, int initWeight, int initPower, int initHealth)
+	public Fighter(String initName, int initHeight, int initWeight, int initPower, int initHealth, ImageIcon imageIcon)
 	{
 		super(initName, initHeight, initWeight, initPower, initHealth);
+		defaultImageIcon = imageIcon;
+		defaultImage = imageIcon.getImage();
+	}
+
+	public FacingDirection getDirection()
+	{
+		return direction;
+	}
+
+	public Image getImage()
+	{
+		return defaultImage;
 	}
 
 	public void punch(String targetLocation)
