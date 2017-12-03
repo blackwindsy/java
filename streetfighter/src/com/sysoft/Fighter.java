@@ -20,16 +20,14 @@ public class Fighter extends Person
 		direction = FacingDirection.RIGHT;
 	}
 
-	public Fighter(String initName, int initHeight, int initWeight, int initPower, int initHealth, ImageIcon imageIcon)
+	public Fighter(String initName, int initHeight, int initWeight, int initPower, int initHealth, ImageIcon imageIcon, int x, int y, FacingDirection d)
 	{
 		super(initName, initHeight, initWeight, initPower, initHealth);
 		defaultImageIcon = imageIcon;
 		defaultImage = imageIcon.getImage();
-	}
-
-	public FacingDirection getDirection()
-	{
-		return direction;
+		locationX = x;
+		locationY = y;
+		direction = d;
 	}
 
 	public Image getImage()
@@ -37,17 +35,42 @@ public class Fighter extends Person
 		return defaultImage;
 	}
 
-	public void punch(String targetLocation)
+	public int getLocationX()
 	{
-		System.out.println("Punching the target location of " + targetLocation);
-		
+		return locationX;
+	}
+	
+	public int getLocationY()
+	{
+		return locationY;
+	}
+	
+	public void setLocation(int x, int y)
+	{
+		locationX = x;
+		locationY = y;
 	}
 
+	public FacingDirection getDirection()
+	{
+		return direction;
+	}
+	
 	public void setDirection(FacingDirection newDirection)
 	{
 		direction = newDirection;
 	}
 
+
+
+
+	
+
+	public void punch(String targetLocation)
+	{
+		System.out.println("Punching the target location of " + targetLocation);
+		
+	}
 	
 
 	

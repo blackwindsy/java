@@ -23,15 +23,15 @@ public class GameBoard extends JPanel
 	}
 
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		// makes the borders of the figures smoother
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		g2d.fillOval(10, 20, 15, 15);
-		g2d.drawImage(fighterOne.getImage(), 100, 200, null);
-		g2d.drawImage(fighterTwo.getImage(), 500, 200, null);
+		g2d.drawImage(fighterOne.getImage(), fighterOne.getLocationX(), fighterOne.getLocationY(), null);
+		g2d.drawImage(fighterTwo.getImage(), fighterTwo.getLocationX(), fighterTwo.getLocationY(), null);
+		repaint();
 	}
 
 }

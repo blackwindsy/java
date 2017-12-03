@@ -15,22 +15,22 @@ public class StreetFighter
 
         // crate fighter one
         ImageIcon ryuImage = new ImageIcon("image/ryu/ryu-snk-stand.gif");
-        Fighter fone = new Fighter("Ryu", 190, 95, 100, 100, ryuImage);
+        Fighter fone = new Fighter("Ryu", 190, 95, 100, 100, ryuImage, 100, 100, FacingDirection.RIGHT);
 
         // crate fighter two
         ImageIcon kenImage = new ImageIcon("image/ken/ken-snk-stand.gif");
-        Fighter ftwo = new Fighter("Ken", 190, 95, 100, 100, kenImage);
+        Fighter ftwo = new Fighter("Ken", 190, 95, 100, 100, kenImage, 500, 100, FacingDirection.LEFT);
 
         // create game board with two fighters
         GameBoard board = new GameBoard(fone, ftwo);
 
         // open game window
         JFrame gameFrame = new JFrame("Street Fighter");
-        gameFrame.add(board);
+        //gameFrame.add(board);
         gameFrame.setSize(1000, 800);
         gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gameFrame.setVisible(true);
-
+        gameFrame.add(board);
 
     }
 }
