@@ -26,11 +26,11 @@ public class StreetFighter
 
         // open game window
         JFrame gameFrame = new JFrame("Street Fighter");
-        //gameFrame.add(board);
         gameFrame.setSize(1000, 800);
         gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         gameFrame.setVisible(true);
         gameFrame.add(board);
+        
 
     }
 }

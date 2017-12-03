@@ -11,6 +11,8 @@ public class GameBoard extends JPanel
 {
 	Fighter fighterOne;
 	Fighter fighterTwo;
+	Image fighterOneImage;
+	Image fighterTwoImage;
 
 	public GameBoard()
 	{
@@ -20,6 +22,8 @@ public class GameBoard extends JPanel
 	{
 		fighterOne = fone;
 		fighterTwo = ftwo;
+		fighterOneImage = fone.getImage();
+		fighterTwoImage = ftwo.getImage();
 	}
 
 	@Override
@@ -28,10 +32,8 @@ public class GameBoard extends JPanel
 		Graphics2D g2d = (Graphics2D) g;
 		// makes the borders of the figures smoother
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
 		g2d.drawImage(fighterOne.getImage(), fighterOne.getLocationX(), fighterOne.getLocationY(), null);
 		g2d.drawImage(fighterTwo.getImage(), fighterTwo.getLocationX(), fighterTwo.getLocationY(), null);
-		repaint();
 	}
 
 }
