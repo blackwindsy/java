@@ -40,9 +40,29 @@ public class Person
 		return name;
 	}
 
+	public void setName(String newName)
+	{
+		name = newName;
+	}
+
 	public int getHeight()
 	{
 		return height;
+	}
+
+	public void setHeight(int newHeight)
+	{
+		height = newHeight;
+	}
+
+	public int getWeight()
+	{
+		return weight;
+	}
+
+	public void setWeight(int newWeight)
+	{
+		weight = newWeight;
 	}
 
 	public int getPower()
@@ -50,9 +70,19 @@ public class Person
 		return power;
 	}
 
+	public void setPower(int newPower)
+	{
+		power = newPower;
+	}
+
 	public int getHealth()
 	{
 		return health;
+	}
+
+	public void setHealth(int newHealth)
+	{
+		health = newHealth;
 	}
 
 	public void run(int time, int distance)

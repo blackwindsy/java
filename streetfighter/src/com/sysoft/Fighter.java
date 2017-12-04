@@ -1,15 +1,20 @@
 package com.sysoft;
 
 import java.awt.Image;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
+
 
 public class Fighter extends Person
 {
+	private static final int MOVE_INTERVAL = 10;
+	private int maxX;
+	private int maxY;
 	private int locationX;
 	private int locationY;
-	private ImageIcon defaultImageIcon;
-	private Image defaultImage;
+	private Image image;
 	private FacingDirection direction;
+	private HashMap<String, Object> imageStore;
 
 
 	public Fighter()
@@ -20,19 +25,22 @@ public class Fighter extends Person
 		direction = FacingDirection.RIGHT;
 	}
 
-	public Fighter(String initName, int initHeight, int initWeight, int initPower, int initHealth, ImageIcon imageIcon, int x, int y, FacingDirection d)
+	public Fighter(String initName, int initHeight, int initWeight, int initPower, int initHealth, 
+			HashMap<String, Object> initImageStore, int initX, int initY, int initMaxX, int initMaxY, FacingDirection initDirection)
 	{
 		super(initName, initHeight, initWeight, initPower, initHealth);
-		defaultImageIcon = imageIcon;
-		defaultImage = imageIcon.getImage();
-		locationX = x;
-		locationY = y;
-		direction = d;
+		imageStore = initImageStore;
+		image = (Image)initImageStore.get("default");
+		locationX = initX;
+		locationY = initY;
+		maxX = initMaxX;
+		maxY = initMaxY;
+		direction = initDirection;
 	}
 
 	public Image getImage()
 	{
-		return defaultImage;
+		return image;
 	}
 
 	public int getLocationX()
@@ -62,7 +70,18 @@ public class Fighter extends Person
 	}
 
 
-
+	public void makeMove(String input)
+	{
+		switch (input)
+		{
+			case "LEFT": if (locationX > MOVE_INTERVAL) locationX -= MOVE_INTERVAL;
+				break;
+			case "RIGHT": if (locationX < maxX + MOVE_INTERVAL) locationX += MOVE_INTERVAL;
+				break;
+			default: 
+				break;
+		}
+	}
 
 	
 
