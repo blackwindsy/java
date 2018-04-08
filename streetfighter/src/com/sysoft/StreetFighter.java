@@ -18,19 +18,9 @@ public class StreetFighter
     
     public static void main(String args[])
     {
-
-        // crate fighter one
-        HashMap<String, Object> ryuImageStore = new HashMap<String, Object>();
-        ryuImageStore.put("default", new ImageIcon("image/ryu/ryu-snk-stand.gif").getImage());
-        Fighter fone = new Fighter("Ryu", 190, 95, 100, 100, ryuImageStore, 100, 400, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.RIGHT);
-
-        // crate fighter two
-        HashMap<String, Object> kenImageStore = new HashMap<String, Object>();
-        kenImageStore.put("default", new ImageIcon("image/ken/ken-snk-stand.gif").getImage());
-        Fighter ftwo = new Fighter("Ken", 190, 95, 100, 100, kenImageStore, 700, 400, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.LEFT);
-
+        HashMap<String, Object> fighterStore = loadFighters();
         // create game board with two fighters
-        GameBoard board = new GameBoard(fone, ftwo);
+        GameBoard board = new GameBoard((Fighter)fighterStore.get("Ryu"), (Fighter)fighterStore.get("Ken"));
 
         // open game window
         JFrame gameFrame = new JFrame("Street Fighter");
@@ -42,5 +32,20 @@ public class StreetFighter
         gameFrame.setVisible(true);
         
 
+    }
+
+    public static HashMap<String, Object> loadFighters()
+    {
+        HashMap<String, Object> fighterStore = new HashMap<String, Object>();
+
+        HashMap<String, Object> ryuImageStore = new HashMap<String, Object>();
+        ryuImageStore.put("default", new ImageIcon("image/ryu/ryu-snk-stand.gif").getImage());
+        fighterStore.put("Ryu", new Fighter("Ryu", 190, 95, 100, 100, ryuImageStore, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.RIGHT));
+
+        HashMap<String, Object> kenImageStore = new HashMap<String, Object>();
+        kenImageStore.put("default", new ImageIcon("image/ken/ken-snk-stand.gif").getImage());
+        fighterStore.put("Ken", new Fighter("Ken", 190, 95, 100, 100, kenImageStore, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.LEFT));
+
+        return fighterStore;
     }
 }

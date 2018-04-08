@@ -2,9 +2,15 @@
 <project name="buildJava" default="compile" basedir=".">
 
 	<property name="proj.root.dir" value="${basedir}"/>
+    <property name="prog.name" value="StreetFighter"/>
     <property name="target.jvm" value="1.8"/>
+    <property name="manifest" value="MANIFEST.MF"/>
+    <property name="version" value="1.0.0.0"/>
+    <property name="author" value="SySoft"/>
+    <property name="main.class.name" value="com.sysoft.StreetFighter"/>
     <property name="src.dir" value="${proj.root.dir}/src"/>
     <property name="lib.dir" value="${proj.root.dir}/lib"/>
+    <property name="image.dir" value="${proj.root.dir}/image"/>
     <property name="build.dir" value="${proj.root.dir}/build"/>
     <property name="dist.dir" value="${proj.root.dir}/dist"/>
 
@@ -30,18 +36,16 @@
 		<echo message="Start time     = ${curtime}" />
 		<echo message="isWin          = ${isWin}" />
 		<echo message="isNix          = ${isNix}" />
-		<echo message="proj.root.dir       = ${proj.root.dir}" />
-		<echo message="target.name         = ${target.name}" />
-		<echo message="target.jvm          = ${target.jvm}" />
-		<echo message="lib.dir             = ${lib.dir}" />
-		<echo message="build.dir           = ${build.dir}" />
-		<echo message="dist.dir            = ${dist.dir}" />
+		<echo message="proj.root.dir  = ${proj.root.dir}" />
+		<echo message="target.name    = ${target.name}" />
+		<echo message="target.jvm     = ${target.jvm}" />
+		<echo message="lib.dir        = ${lib.dir}" />
+		<echo message="build.dir      = ${build.dir}" />
+		<echo message="dist.dir       = ${dist.dir}" />
 	</target>
 
 
-	<target name="compile"
-			depends="init"
-			description="compile java source code">
+	<target name="compile" depends="init" description="compile java source code">
 		<delete dir="${build.dir}/classes"/>
 		<mkdir dir="${build.dir}/classes"/>
 		<javac destdir="${build.dir}/classes" source="${target.jvm}" target="${target.jvm}" debug="on" deprecation="off" optimize="on">
@@ -50,10 +54,11 @@
 		</javac>
 	</target>
 
+
 	<target name="run"
 			depends="compile"
 			description="run java byte code">
-		<java classname="com.sysoft.StreetFighter"
+		<java classname="${main.class.name}"
 				fork="true">
 			<classpath>
 				<!--
@@ -69,5 +74,40 @@
 	</target>
 
 
+	<target name="package" depends="compile" description="package code for distribution">
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<jar jarfile="${dist.dir}/${prog.name}.jar">
+			<manifest>
+				<attribute name="Manifest-Version" value="${version}"/>
+				<attribute name="Created-By" value="${author}"/>
+				<attribute name="Main-Class" value="${main.class.name}.class"/>
+			</manifest>
+			<fileset dir="${build.dir}/classes">
+				<include name="com/**"/>
+			</fileset>
+			<fileset dir="${image.dir}">
+				<include name="**"/>
+			</fileset>
+		</jar>
+	</target>
+
+
+	<target name="run.dist" depends="package" description="run java byte code from distribution file">
+		
+		<java jar="${dist.dir}/${prog.name}.jar"
+				fork="true">
+			<classpath>
+				<!--
+				-->
+				<pathelement location="image"/>
+				<!--
+				<fileset dir="${build.dir}/classes">
+					<include name="**/*.class"/>
+				</fileset>
+				-->
+			</classpath>
+		</java>
+	</target>
 
 </project>

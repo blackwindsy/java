@@ -17,7 +17,7 @@ import javax.swing.Timer;
 
 public class GameBoard extends JPanel implements ActionListener
 {
-	private static final long serialVersionUID = -34567876544567L;
+	//private static final long serialVersionUID = -34567876544567L;
 	private Timer timer;
 	private static final int DELAY = 10;
 
@@ -88,7 +88,11 @@ public class GameBoard extends JPanel implements ActionListener
 		{
 			int keyCode = ke.getKeyCode();
 			String keyText = KeyEvent.getKeyText(ke.getKeyCode());
-			System.out.println("keyPressed = " + keyText);
+
+			//debug
+			System.out.println("fighterOne = " + fighterOne);
+			System.out.println("fighterTwo = " + fighterTwo);
+			System.out.println("==> keyPressed = " + keyText);
 
 			// fighter one move
 			if (keyCode == KeyEvent.VK_Z)
@@ -125,6 +129,10 @@ public class GameBoard extends JPanel implements ActionListener
 			{
 				fighterTwo.makeMove("DOWN");
 			} 
+
+			//debug
+			System.out.println("fighterOne = " + fighterOne);
+			System.out.println("fighterTwo = " + fighterTwo);
 		}
 		
 		@Override
