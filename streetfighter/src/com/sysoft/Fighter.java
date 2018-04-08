@@ -3,8 +3,7 @@ package com.sysoft;
 import java.awt.Image;
 import java.util.HashMap;
 
-import javax.net.ssl.ExtendedSSLSession;
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 
 
 public class Fighter extends Person

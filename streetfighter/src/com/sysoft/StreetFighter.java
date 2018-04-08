@@ -1,10 +1,14 @@
 package com.sysoft;
 
+import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,13 +42,23 @@ public class StreetFighter
     {
         HashMap<String, Object> fighterStore = new HashMap<String, Object>();
 
-        HashMap<String, Object> ryuImageStore = new HashMap<String, Object>();
-        ryuImageStore.put("default", new ImageIcon("image/ryu/ryu-snk-stand.gif").getImage());
-        fighterStore.put("Ryu", new Fighter("Ryu", 190, 95, 100, 100, ryuImageStore, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.RIGHT));
-
-        HashMap<String, Object> kenImageStore = new HashMap<String, Object>();
-        kenImageStore.put("default", new ImageIcon("image/ken/ken-snk-stand.gif").getImage());
-        fighterStore.put("Ken", new Fighter("Ken", 190, 95, 100, 100, kenImageStore, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.LEFT));
+        try {
+            HashMap<String, Object> ryuImageStore = new HashMap<String, Object>();
+            //ryuImageStore.put("default", new ImageIcon("image/ryu/ryu-snk-stand.gif").getImage());
+            BufferedImage ryuStandImg = ImageIO.read(new File("image/ryu/ryu-snk-stand.gif"));
+            ryuImageStore.put("default", ryuStandImg);
+            fighterStore.put("Ryu", new Fighter("Ryu", 190, 95, 100, 100, ryuImageStore, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.RIGHT));
+    
+            HashMap<String, Object> kenImageStore = new HashMap<String, Object>();
+            kenImageStore.put("default", new ImageIcon("image/ken/ken-snk-stand.gif").getImage());
+            fighterStore.put("Ken", new Fighter("Ken", 190, 95, 100, 100, kenImageStore, WINDOW_WIDTH, WINDOW_HEIGHT, FacingDirection.LEFT));
+        } catch (IllegalArgumentException iae) {
+            iae.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+        }
 
         return fighterStore;
     }
