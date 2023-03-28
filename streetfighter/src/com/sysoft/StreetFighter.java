@@ -18,7 +18,7 @@ import javax.swing.WindowConstants;
 public class StreetFighter
 {
     public static final int WINDOW_WIDTH = 1000;
-    public static final int WINDOW_HEIGHT = 700;
+    public static final int WINDOW_HEIGHT = 800;
     
     public static void main(String args[])
     {
